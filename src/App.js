@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import FiltersRender from './components/FiltersRender';
 import InputNameFilter from './components/InputNameFilter';
 import NumFilter from './components/NumFilter';
 import Table from './components/Table';
@@ -10,6 +11,7 @@ function App() {
     <Provider>
       <InputNameFilter />
       <NumFilter />
+      <FiltersRender />
       <Table />
     </Provider>
   );

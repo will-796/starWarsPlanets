@@ -26,6 +26,7 @@ const NumFilter = () => {
 
   useEffect(() => {
     setNumFilters((prev) => ({ ...prev, column: dynamicColumnFilter[0] }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterByNumericValues]);
 
   return (
@@ -73,6 +74,7 @@ const NumFilter = () => {
       <button
         type="button"
         data-testid="button-filter"
+        disabled={ filterByNumericValues.length === +'5' }
         onClick={ () => setFilterByNumericValues([...filterByNumericValues, numFilters]) }
       >
         filter
