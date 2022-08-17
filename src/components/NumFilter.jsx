@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import context from '../context/context';
 
 const NumFilter = () => {
@@ -18,8 +18,16 @@ const NumFilter = () => {
     'rotation_period',
     'surface_water',
   ];
+  const dynamicColumnFilter = columnFilter.filter(
+    (column) => !filterByNumericValues.some((element) => column === element.column),
+  );
   const comparisonFilter = ['maior que', 'menor que', 'igual a'];
   const { column, comparison, value } = numFilters;
+
+  useEffect(() => {
+    setNumFilters((prev) => ({ ...prev, column: dynamicColumnFilter[0] }));
+  }, [filterByNumericValues]);
+
   return (
     <form>
       <label htmlFor="column">
@@ -30,7 +38,7 @@ const NumFilter = () => {
           onChange={ (e) => setNumFilters({ ...numFilters, column: e.target.value }) }
           data-testid="column-filter"
         >
-          {columnFilter.map((columnOption) => (
+          {dynamicColumnFilter.map((columnOption) => (
             <option key={ columnOption } value={ columnOption }>
               {columnOption}
             </option>
