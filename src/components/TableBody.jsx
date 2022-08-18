@@ -22,15 +22,14 @@ const TableBody = () => {
     }))
     .sort((a) => {
       const { column, sorted } = order;
-      if (sorted) return Number.isNaN(+a[column]) ? 1 : false - true;
-      return 0;
+      return sorted && !Number.isNaN(+a[column]) ? +'-1' : 0;
     })
     .sort((a, b) => {
       const { column, sort, sorted } = order;
 
       if (sorted) {
         if (sort === 'DESC') return b[column] - a[column];
-        if (sort === 'ASC') return a[column] - b[column];
+        return a[column] - b[column];
       }
       return 0;
     });
