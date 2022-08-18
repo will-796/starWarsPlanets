@@ -6,9 +6,16 @@ const Provider = ({ children }) => {
   const [data, setData] = useState([]);
   const [nameFilter, setNameFilter] = useState('');
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
+  const [order, setOrder] = useState({
+    column: 'population',
+    sort: 'ASC',
+    sorted: false,
+  });
   useEffect(() => {
     const fetchApi = async () => {
-      const response = await fetch('https://swapi-trybe.herokuapp.com/api/planets/');
+      const response = await fetch(
+        'https://swapi-trybe.herokuapp.com/api/planets/',
+      );
       const responseData = await response.json();
       setData(responseData.results);
     };
@@ -20,14 +27,12 @@ const Provider = ({ children }) => {
       nameFilter,
       filterByNumericValues,
     },
+    order,
     setNameFilter,
     setFilterByNumericValues,
+    setOrder,
   };
-  return (
-    <Context.Provider value={ contextValue }>
-      {children}
-    </Context.Provider>
-  );
+  return <Context.Provider value={ contextValue }>{children}</Context.Provider>;
 };
 
 Provider.propTypes = {
